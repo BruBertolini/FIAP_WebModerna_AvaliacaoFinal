@@ -1,0 +1,15 @@
+<div class="container margem">
+  <h1>Contatos Salvos </h1>
+  <hr/>
+  <div class="row">
+    <div class="col-md-12">
+
+      <ul class="list_group">
+        <li *ngFor="let item of listaContatos" class="list-group-item">
+          <p>{{item.nome | uppercase}}</p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
