@@ -1,6 +1,6 @@
 import { IContato } from './../interfaces/interface.contato';
-import { Component } from '@angular/core';
 import { ContatoService } from '../services/contato.service';
+
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ export class CadastroComponent {
   public msg: string;
   public busca: string = '';
 
-  constructor(contatoService: ContatoService) {
+  constructor(private contatoService: ContatoService) {
     this.listaContatos = contatoService.getContatos();
     this.msg = '';
   }
@@ -28,15 +28,17 @@ export class CadastroComponent {
     const contatoAtual = this.listaContatos.indexOf(contato);
 
     if (contatoAtual > -1) {
-      this.listaContatos[contatoAtual] = contato;
+     // this.listaContatos[contatoAtual] = contato;
+
+     this.contatoService.editContato(contato, contatoAtual);
       this.msg = 'Contato alterado com sucesso';
       this.novo();
     } else {
-      this.listaContatos.push(contato);
+      this.contatoService.addContato(contato);
       this.msg = 'Contato incluído com sucesso';
       this.novo();
     }
-
+    this.listaContatos = this.contatoService.getContatos();
     this.busca = '';
   }
 
